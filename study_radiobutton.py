@@ -1,23 +1,25 @@
 import tkinter as tk
 from tkinter import messagebox
 
-window = tk.Tk()
-window.title("Радиокнопки")
-window.geometry("300x200")
 
-var = tk.StringVar(value="python")
+def study_radio():
 
-tk.Label(window, text="Выберите язык").pack(pady=5)
-tk.Radiobutton(window, text="Python", variable=var, value="python").pack()
+    window = tk.Tk()
+    window.title("Радиокнопки")
+    window.geometry("300x200")
 
-tk.Radiobutton(window, text="Java", variable=var, value="java").pack()
-tk.Radiobutton(window, text="C++", variable=var, value="c++").pack()
+    var = tk.StringVar(value="python")
+
+    tk.Label(window, text="Выберите язык").pack(pady=5)
+    tk.Radiobutton(window, text="Python", variable=var, value="python").pack()
+
+    tk.Radiobutton(window, text="Java", variable=var, value="java").pack()
+    tk.Radiobutton(window, text="C++", variable=var, value="c++").pack()
 
 
-def show_values():
-    messagebox.showinfo("Результат", f"Выбран: {var.get()}")
+    def show_values():
+        messagebox.showinfo("Результат", f"Выбран: {var.get()}")
 
 
-tk.Button(window, text="Показать", command=show_values).pack(pady=10)
+    tk.Button(window, text="Показать", command=show_values).pack(pady=10)
 
-window.mainloop()
