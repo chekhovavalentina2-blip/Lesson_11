@@ -9,4 +9,8 @@ def summa(a:int, b:float) -> int:
     return a + b
 
 
-print('привет из модуля')
+
+if __name__ == '__main__':
+    print('самостоятельный запуск')
+else:
+    print(__name__, 'был импортирован')
