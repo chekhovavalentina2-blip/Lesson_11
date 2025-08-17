@@ -26,9 +26,8 @@ def study_checkbox():
             langs.append("Java")
         if var3.get():
             langs.append("C++")
-
-            
-        # messagebox.showinfo("Результат", f"Выбран: {var.get()}")
+        
+        messagebox.showinfo("Результат", f"Выбран: {', '.join(langs)}")
 
 
     tk.Button(window, text="Показать", command=show_coice).pack(pady=10)
