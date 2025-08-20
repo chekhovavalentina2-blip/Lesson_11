@@ -29,7 +29,7 @@ def move_paddle(event):
 
 dx, dy = -5, -5
 
-def move_ball():
+def game_loop():
     global dx, dy
     canvas.move(ball, dx, dy)
     x1, y1, x2, y2 = canvas.coords(ball)
@@ -42,7 +42,7 @@ def move_ball():
     
     # Проигрыш при падении вниз
     if y2 >= 300:
-        print("Game Over")
+        canvas.create_text(200, 150, text='Game Over', fill='red', font=('Arial', 20))
         return
     
     # Отскок от платформы
@@ -50,8 +50,20 @@ def move_ball():
     if y2 >= py1 and x2 >= px1 and x1 <= px2:
         dy = -dy
     
-    root.after(50, move_ball)
+    # Столкновение с блоками
+    for block in blocks:
+        bx1, by1, bx2, by2 = canvas.coords(block)
+        if y1 <= by2 and y2 >= by1 and x2 >= bx1 and x1 <= bx2:
+            canvas.delete(block)
+            blocks.remove(block)
+            dy = -dy
+            break
+
+
+    root.after(50, game_loop)
 
 root.bind('<Key>', move_paddle)
+root.focus_set()
 
+game_loop()  # Запуск движения мяча
 root.mainloop()
