@@ -27,6 +27,31 @@ def move_paddle(event):
         canvas.move(paddle, 20, 0)
 
 
+dx, dy = -5, -5
+
+def move_ball():
+    global dx, dy
+    canvas.move(ball, dx, dy)
+    x1, y1, x2, y2 = canvas.coords(ball)
+
+    # Отскок от стен
+    if x1 <= 0 or x2 >= 400:
+        dx = -dx
+    if y1 <= 0:
+        dy = -dy
+    
+    # Проигрыш при падении вниз
+    if y2 >= 300:
+        print("Game Over")
+        return
+    
+    # Отскок от платформы
+    px1, py1, px2, py2 = canvas.coords(paddle)
+    if y2 >= py1 and x2 >= px1 and x1 <= px2:
+        dy = -dy
+    
+    root.after(50, move_ball)
+
 root.bind('<Key>', move_paddle)
 
 root.mainloop()
